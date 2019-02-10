@@ -12,7 +12,7 @@ class InputFile:
         self._file = open(file_path, 'r')
         self._parse()
 
-    def __del(self):
+    def __del__(self):
         self._file.close()
 
     def _parse(self):
