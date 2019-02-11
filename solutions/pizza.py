@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from cfg import DEBUG
+from cfg import log
 
 
 class Slice:
@@ -32,6 +32,13 @@ class Slice:
     def num_cells(self):
         return self.num_rows * self.num_cols
 
+    def overlaps(self, other):
+        if self.c1 >= other.c2 or self.c2 <= other.c1:
+            return False
+        if self.r1 >= other.r2 or self.r2 <= other.r1:
+            return False
+        return True
+
 
 class Pizza:
     def __init__(self, input_file, output_file):
@@ -43,17 +50,42 @@ class Pizza:
     def num_slices(self):
         return len(self.slices)
 
-    def add_slice(self, r1, c1, r2, c2):
-        s = Slice(self, r1, c1, r2, c2)
-        self.slices.append(s)
+    def overlaps(self, new_slice):
+        for s in self.slices:
+            if s.overlaps(new_slice):
+                return True
+        return False
 
-        if DEBUG:
-            print("Slice: " + str(self.num_slices()))
-            print(s.content)
-            print("Number of cells: " + str(s.num_cells))
-            print("Number of tomato cells (T): " + str(s.num_cells_tomato))
-            print("Number of mushroom cells (M): " + str(s.num_cells_mushroom))
-            print("*"*10)
+    def slice(self, r1, c1, r2, c2):
+        s = Slice(self, r1, c1, r2, c2)
+
+        log("*************************************")
+        log("Slice: " + str(self.num_slices()))
+        log(s.content)
+        log("Number of cells: " + str(s.num_cells))
+        log("Number of tomato cells (T): " + str(s.num_cells_tomato))
+        log("Number of mushroom cells (M): " + str(s.num_cells_mushroom))
+
+        if s.num_cells_tomato < self.input_file.num_ingredients_min:
+            log("Too few tomato cells :(")
+            return False
+
+        if s.num_cells_mushroom < self.input_file.num_ingredients_min:
+            log("Too few mushroom cells :(")
+            return False
+
+        if s.num_cells > self.input_file.num_cells_max:
+            log("Too many cells :(")
+            return False
+
+        if self.overlaps(s):
+            log("Overlaps with existing cells :(")
+            return False
+
+        log("Valid pizza slice :)")
+
+        self.slices.append(s)
+        return True
 
     def write_output(self):
         self.output_file.write(self.slices)

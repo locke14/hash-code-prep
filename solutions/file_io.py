@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import numpy as np
-from cfg import DEBUG
+from cfg import log
 
 
 class InputFile:
@@ -34,11 +34,10 @@ class InputFile:
 
         self.content = np.array(rows)
 
-        if DEBUG:
-            print("Number of rows (R): " + str(self.num_rows))
-            print("Number of columns (C): " + str(self.num_cols))
-            print("Minimum number of each ingredient cells in each slice (L): " + str(self.num_ingredients_min))
-            print("Maximum total number of cells of a slice (H): " + str(self.num_cells_max))
+        log("Number of rows (R): " + str(self.num_rows))
+        log("Number of columns (C): " + str(self.num_cols))
+        log("Minimum number of each ingredient cells in each slice (L): " + str(self.num_ingredients_min))
+        log("Maximum total number of cells of a slice (H): " + str(self.num_cells_max))
 
     def print(self):
         for line in self._file:

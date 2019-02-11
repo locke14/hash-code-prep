@@ -13,9 +13,9 @@ class PizzaSlicer:
         self.pizza = Pizza(input_file, output_file)
 
     def slice_pizza(self):
-        self.pizza.add_slice(0, 0, 2, 1)
-        self.pizza.add_slice(0, 2, 2, 2)
-        self.pizza.add_slice(0, 3, 2, 4)
+        self.pizza.slice(0, 0, 2, 1)
+        self.pizza.slice(0, 2, 2, 2)
+        self.pizza.slice(0, 3, 2, 4)
         self.pizza.write_output()
 
 

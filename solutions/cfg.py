@@ -11,3 +11,8 @@ INPUT_FORMAT = ".in"
 OUTPUT_FORMAT = ".out"
 
 DEBUG = True
+
+
+def log(msg):
+    if DEBUG:
+        print(msg)
