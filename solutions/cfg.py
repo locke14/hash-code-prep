@@ -10,6 +10,8 @@ DATASET_D = "d_big"
 INPUT_FORMAT = ".in"
 OUTPUT_FORMAT = ".out"
 
+N = 100
+
 DEBUG = True
 
 

@@ -10,7 +10,7 @@ class InputFile:
         self.num_rows = 0
         self.num_cols = 0
         self.num_ingredients_min = 0
-        self.num_cells_max = 0
+        self.num_cells_per_slice_max = 0
 
         self._file = open(file_path, 'r')
         self._parse()
@@ -24,7 +24,7 @@ class InputFile:
         self.num_rows = int(line0[0])
         self.num_cols = int(line0[2])
         self.num_ingredients_min = int(line0[4])
-        self.num_cells_max = int(line0[6])
+        self.num_cells_per_slice_max = int(line0[6])
 
         rows = []
         for line in content[1:]:
@@ -37,7 +37,7 @@ class InputFile:
         log("Number of rows (R): " + str(self.num_rows))
         log("Number of columns (C): " + str(self.num_cols))
         log("Minimum number of each ingredient cells in each slice (L): " + str(self.num_ingredients_min))
-        log("Maximum total number of cells of a slice (H): " + str(self.num_cells_max))
+        log("Maximum total number of cells of a slice (H): " + str(self.num_cells_per_slice_max))
 
     def print(self):
         for line in self._file:
