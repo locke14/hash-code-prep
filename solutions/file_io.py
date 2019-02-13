@@ -20,11 +20,11 @@ class InputFile:
 
     def _parse(self):
         content = self._file.readlines()
-        line0 = content[0]
-        self.num_rows = int(line0[0])
-        self.num_cols = int(line0[2])
-        self.num_ingredients_min = int(line0[4])
-        self.num_cells_per_slice_max = int(line0[6])
+        header = content[0].split()
+        self.num_rows = int(header[0])
+        self.num_cols = int(header[1])
+        self.num_ingredients_min = int(header[2])
+        self.num_cells_per_slice_max = int(header[3])
 
         rows = []
         for line in content[1:]:
