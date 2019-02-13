@@ -5,6 +5,7 @@ from file_io import InputFile, OutputFile
 from pizza import Pizza, Slice
 from constraint import *
 from cfg import *
+from utils import log
 import operator
 
 
@@ -38,7 +39,11 @@ class PizzaSlicer:
         for var in slice_vars:
             p.addVariable(var, valid_slices)
 
-        p.addConstraint(FunctionConstraint(self.pizza.is_valid_cut), slice_vars)
+        for i in range(num_slices):
+            for j in range(num_slices):
+                if i != j:
+                    p.addConstraint(FunctionConstraint(self.pizza.is_valid_cut), [slice_vars[i], slice_vars[j]])
+
         valid_cuts_iter = p.getSolutionIter()
         valid_cuts = list(next(valid_cuts_iter) for _ in range(N))
         valid_cuts = [tuple(c.values()) for c in valid_cuts]
@@ -51,8 +56,8 @@ class PizzaSlicer:
     def slice_pizza(self):
         valid_slices = self.get_valid_slices()
 
-        num_slices_min = 3  # self.pizza.num_slices_min
-        num_slices_max = 4  # self.pizza.num_slices_max
+        num_slices_min = self.pizza.num_slices_min
+        num_slices_max = 10  # self.pizza.num_slices_max
 
         valid_cuts_all = {}
         for i in range(num_slices_min, num_slices_max + 1):

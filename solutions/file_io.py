@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import numpy as np
-from cfg import log
+from utils import log
 
 
 class InputFile:

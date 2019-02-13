@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 DATASETS_PATH = "./../datasets/"
 DATASET_A = "a_example"
 DATASET_B = "b_small"
@@ -10,11 +9,6 @@ DATASET_D = "d_big"
 INPUT_FORMAT = ".in"
 OUTPUT_FORMAT = ".out"
 
-N = 100
+N = 10000
 
 DEBUG = True
-
-
-def log(msg):
-    if DEBUG:
-        print(msg)

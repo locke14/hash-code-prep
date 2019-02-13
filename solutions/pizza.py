@@ -93,7 +93,7 @@ class Pizza:
 
     @staticmethod
     def is_valid_cut(*slices):
-        p = it.permutations(slices, 2)
+        p = it.combinations(slices, 2)
         for s1, s2 in p:
             if s1.overlaps(s2):
                 return False
